@@ -1,0 +1,2311 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "style": {
+                "color": "#D5D5D5",
+                "fontFamily": "Verdana",
+                "fontSize": "14pt",
+                "marginLeft": "25px",
+                "marginRight": "25px",
+                "textAlign": "center"
+              },
+              "text": "UDT Type"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label0"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "style": {
+                "color": "#D5D5D5",
+                "fontFamily": "Verdana",
+                "fontSize": "14pt",
+                "marginLeft": "25px",
+                "marginRight": "25px",
+                "textAlign": "center"
+              },
+              "text": "Device Type"
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "Title"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "backgroundColor": "#808080",
+            "borderBottomLeftRadius": "15px",
+            "borderBottomRightRadius": "15px",
+            "borderStyle": "none",
+            "fontFamily": "inherit",
+            "marginBottom": "20px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Define the folder path\n\tfolderPath \u003d \"[default]_types_\"\n\t\n\t# List to hold dropdown options\n\toptions \u003d []\n\t\n\t# Browse the folder for tags filtering just UDTTypes\n\tresults \u003d system.tag.browse(folderPath , {\"tagType\":\"UdtType\", \"recursive\":True})\n\t\n\t# Iterate through the results and collect tag names\n\tfor result in results.getResults():\n\t    # Get the full path of the tag and convert it to a string\n\t    fullPath \u003d str(result[\u0027fullPath\u0027])\n\t    # Split the full path by \u0027_types_\u0027 and get the last part (tag name)\n\t    tagName \u003d fullPath.split(\u0027_types_/\u0027)[-1]  # Get the last element after splitting\n\t    # Create a dictionary for each tag for the dropdown\n\t    options.append({\"label\": tagName, \"value\": tagName})\n\t\n\t#Set the options property of the dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown0"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Customer1/VFD",
+                  "value": "Customer1/VFD"
+                },
+                {
+                  "label": "Customer2/test 4",
+                  "value": "Customer2/test 4"
+                },
+                {
+                  "label": "DCIS_DT_AI",
+                  "value": "DCIS_DT_AI"
+                },
+                {
+                  "label": "DCIS_DT_AO",
+                  "value": "DCIS_DT_AO"
+                },
+                {
+                  "label": "DCIS_DT_CV",
+                  "value": "DCIS_DT_CV"
+                },
+                {
+                  "label": "DCIS_DT_VLV",
+                  "value": "DCIS_DT_VLV"
+                },
+                {
+                  "label": "ThirdCustomer/_DT_AI",
+                  "value": "ThirdCustomer/_DT_AI"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Get the data from the table (assuming it\u0027s a dataset)\n\tdata \u003d self.parent.parent.getChild(\"FlexContainer\").getChild(\"Table\").props.data\n\t\n\t# Initialize a set to hold unique values of the \"Type\" column\n\tunique_types \u003d set()\n\t\n\t# Loop through each row in the table data\n\tfor row in data:\n\t    type_value \u003d row[\u0027Type\u0027]  # Replace \u0027Type\u0027 with the exact column name\n\t    unique_types.add(type_value)  # Add the type to the set, ensuring only unique values\n\t\n\t# Convert the unique types to a list of dictionaries for the dropdown options\n\toptions \u003d [{\"label\": type_value, \"value\": type_value} for type_value in unique_types]\n\t\n\t# Set the options property of the dropdown component\n\tdropdown \u003d self.getSibling(\"Dropdown\")  # Adjust the path to your actual dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "propConfig": {
+              "props.options": {
+                "persistent": false
+              }
+            },
+            "props": {
+              "multiSelect": true,
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "Dropdown1"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "classes": "exchange/udt-instance-generator/UDTContainers"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Define the folder path\n\tfolderPath \u003d \"[default]_types_\"\n\t\n\t# List to hold dropdown options\n\toptions \u003d []\n\t\n\t# Browse the folder for tags filtering just UDTTypes\n\tresults \u003d system.tag.browse(folderPath , {\"tagType\":\"UdtType\", \"recursive\":True})\n\t\n\t# Iterate through the results and collect tag names\n\tfor result in results.getResults():\n\t    # Get the full path of the tag and convert it to a string\n\t    fullPath \u003d str(result[\u0027fullPath\u0027])\n\t    # Split the full path by \u0027_types_\u0027 and get the last part (tag name)\n\t    tagName \u003d fullPath.split(\u0027_types_/\u0027)[-1]  # Get the last element after splitting\n\t    # Create a dictionary for each tag for the dropdown\n\t    options.append({\"label\": tagName, \"value\": tagName})\n\t\n\t#Set the options property of the dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown0"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Customer1/VFD",
+                  "value": "Customer1/VFD"
+                },
+                {
+                  "label": "Customer2/test 4",
+                  "value": "Customer2/test 4"
+                },
+                {
+                  "label": "DCIS_DT_AI",
+                  "value": "DCIS_DT_AI"
+                },
+                {
+                  "label": "DCIS_DT_AO",
+                  "value": "DCIS_DT_AO"
+                },
+                {
+                  "label": "DCIS_DT_CV",
+                  "value": "DCIS_DT_CV"
+                },
+                {
+                  "label": "DCIS_DT_VLV",
+                  "value": "DCIS_DT_VLV"
+                },
+                {
+                  "label": "ThirdCustomer/_DT_AI",
+                  "value": "ThirdCustomer/_DT_AI"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Get the data from the table (assuming it\u0027s a dataset)\n\tdata \u003d self.parent.parent.getChild(\"FlexContainer\").getChild(\"Table\").props.data\n\t\n\t# Initialize a set to hold unique values of the \"Type\" column\n\tunique_types \u003d set()\n\t\n\t# Loop through each row in the table data\n\tfor row in data:\n\t    type_value \u003d row[\u0027Type\u0027]  # Replace \u0027Type\u0027 with the exact column name\n\t    unique_types.add(type_value)  # Add the type to the set, ensuring only unique values\n\t\n\t# Convert the unique types to a list of dictionaries for the dropdown options\n\toptions \u003d [{\"label\": type_value, \"value\": type_value} for type_value in unique_types]\n\t\n\t# Set the options property of the dropdown component\n\tdropdown \u003d self.getSibling(\"Dropdown\")  # Adjust the path to your actual dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "multiSelect": true,
+              "options": [
+                {
+                  "label": "CV",
+                  "value": "CV"
+                },
+                {
+                  "label": "PIT",
+                  "value": "PIT"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "Dropdown2"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown1/Dropdown0.props.value"
+              },
+              "transforms": [
+                {
+                  "expression": "if({value}!\u003d 0,true,false)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "classes": "exchange/udt-instance-generator/UDTContainers"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Define the folder path\n\tfolderPath \u003d \"[default]_types_\"\n\t\n\t# List to hold dropdown options\n\toptions \u003d []\n\t\n\t# Browse the folder for tags filtering just UDTTypes\n\tresults \u003d system.tag.browse(folderPath , {\"tagType\":\"UdtType\", \"recursive\":True})\n\t\n\t# Iterate through the results and collect tag names\n\tfor result in results.getResults():\n\t    # Get the full path of the tag and convert it to a string\n\t    fullPath \u003d str(result[\u0027fullPath\u0027])\n\t    # Split the full path by \u0027_types_\u0027 and get the last part (tag name)\n\t    tagName \u003d fullPath.split(\u0027_types_/\u0027)[-1]  # Get the last element after splitting\n\t    # Create a dictionary for each tag for the dropdown\n\t    options.append({\"label\": tagName, \"value\": tagName})\n\t\n\t#Set the options property of the dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown0"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Customer1/VFD",
+                  "value": "Customer1/VFD"
+                },
+                {
+                  "label": "Customer2/test 4",
+                  "value": "Customer2/test 4"
+                },
+                {
+                  "label": "DCIS_DT_AI",
+                  "value": "DCIS_DT_AI"
+                },
+                {
+                  "label": "DCIS_DT_AO",
+                  "value": "DCIS_DT_AO"
+                },
+                {
+                  "label": "DCIS_DT_CV",
+                  "value": "DCIS_DT_CV"
+                },
+                {
+                  "label": "DCIS_DT_VLV",
+                  "value": "DCIS_DT_VLV"
+                },
+                {
+                  "label": "ThirdCustomer/_DT_AI",
+                  "value": "ThirdCustomer/_DT_AI"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Get the data from the table (assuming it\u0027s a dataset)\n\tdata \u003d self.parent.parent.getChild(\"FlexContainer\").getChild(\"Table\").props.data\n\t\n\t# Initialize a set to hold unique values of the \"Type\" column\n\tunique_types \u003d set()\n\t\n\t# Loop through each row in the table data\n\tfor row in data:\n\t    type_value \u003d row[\u0027Type\u0027]  # Replace \u0027Type\u0027 with the exact column name\n\t    unique_types.add(type_value)  # Add the type to the set, ensuring only unique values\n\t\n\t# Convert the unique types to a list of dictionaries for the dropdown options\n\toptions \u003d [{\"label\": type_value, \"value\": type_value} for type_value in unique_types]\n\t\n\t# Set the options property of the dropdown component\n\tdropdown \u003d self.getSibling(\"Dropdown\")  # Adjust the path to your actual dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "multiSelect": true,
+              "options": [
+                {
+                  "label": "CV",
+                  "value": "CV"
+                },
+                {
+                  "label": "PIT",
+                  "value": "PIT"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "Dropdown3"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown2/Dropdown0.props.value"
+              },
+              "transforms": [
+                {
+                  "expression": "if({value}!\u003d 0,true,false)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "classes": "exchange/udt-instance-generator/UDTContainers"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Define the folder path\n\tfolderPath \u003d \"[default]_types_\"\n\t\n\t# List to hold dropdown options\n\toptions \u003d []\n\t\n\t# Browse the folder for tags filtering just UDTTypes\n\tresults \u003d system.tag.browse(folderPath , {\"tagType\":\"UdtType\", \"recursive\":True})\n\t\n\t# Iterate through the results and collect tag names\n\tfor result in results.getResults():\n\t    # Get the full path of the tag and convert it to a string\n\t    fullPath \u003d str(result[\u0027fullPath\u0027])\n\t    # Split the full path by \u0027_types_\u0027 and get the last part (tag name)\n\t    tagName \u003d fullPath.split(\u0027_types_/\u0027)[-1]  # Get the last element after splitting\n\t    # Create a dictionary for each tag for the dropdown\n\t    options.append({\"label\": tagName, \"value\": tagName})\n\t\n\t#Set the options property of the dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown0"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Customer1/VFD",
+                  "value": "Customer1/VFD"
+                },
+                {
+                  "label": "Customer2/test 4",
+                  "value": "Customer2/test 4"
+                },
+                {
+                  "label": "DCIS_DT_AI",
+                  "value": "DCIS_DT_AI"
+                },
+                {
+                  "label": "DCIS_DT_AO",
+                  "value": "DCIS_DT_AO"
+                },
+                {
+                  "label": "DCIS_DT_CV",
+                  "value": "DCIS_DT_CV"
+                },
+                {
+                  "label": "DCIS_DT_VLV",
+                  "value": "DCIS_DT_VLV"
+                },
+                {
+                  "label": "ThirdCustomer/_DT_AI",
+                  "value": "ThirdCustomer/_DT_AI"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Get the data from the table (assuming it\u0027s a dataset)\n\tdata \u003d self.parent.parent.getChild(\"FlexContainer\").getChild(\"Table\").props.data\n\t\n\t# Initialize a set to hold unique values of the \"Type\" column\n\tunique_types \u003d set()\n\t\n\t# Loop through each row in the table data\n\tfor row in data:\n\t    type_value \u003d row[\u0027Type\u0027]  # Replace \u0027Type\u0027 with the exact column name\n\t    unique_types.add(type_value)  # Add the type to the set, ensuring only unique values\n\t\n\t# Convert the unique types to a list of dictionaries for the dropdown options\n\toptions \u003d [{\"label\": type_value, \"value\": type_value} for type_value in unique_types]\n\t\n\t# Set the options property of the dropdown component\n\tdropdown \u003d self.getSibling(\"Dropdown\")  # Adjust the path to your actual dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "multiSelect": true,
+              "options": [
+                {
+                  "label": "CV",
+                  "value": "CV"
+                },
+                {
+                  "label": "PIT",
+                  "value": "PIT"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "Dropdown4"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown3/Dropdown0.props.value"
+              },
+              "transforms": [
+                {
+                  "expression": "if({value}!\u003d 0,true,false)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "classes": "exchange/udt-instance-generator/UDTContainers"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Define the folder path\n\tfolderPath \u003d \"[default]_types_\"\n\t\n\t# List to hold dropdown options\n\toptions \u003d []\n\t\n\t# Browse the folder for tags filtering just UDTTypes\n\tresults \u003d system.tag.browse(folderPath , {\"tagType\":\"UdtType\", \"recursive\":True})\n\t\n\t# Iterate through the results and collect tag names\n\tfor result in results.getResults():\n\t    # Get the full path of the tag and convert it to a string\n\t    fullPath \u003d str(result[\u0027fullPath\u0027])\n\t    # Split the full path by \u0027_types_\u0027 and get the last part (tag name)\n\t    tagName \u003d fullPath.split(\u0027_types_/\u0027)[-1]  # Get the last element after splitting\n\t    # Create a dictionary for each tag for the dropdown\n\t    options.append({\"label\": tagName, \"value\": tagName})\n\t\n\t#Set the options property of the dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown0"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Customer1/VFD",
+                  "value": "Customer1/VFD"
+                },
+                {
+                  "label": "Customer2/test 4",
+                  "value": "Customer2/test 4"
+                },
+                {
+                  "label": "DCIS_DT_AI",
+                  "value": "DCIS_DT_AI"
+                },
+                {
+                  "label": "DCIS_DT_AO",
+                  "value": "DCIS_DT_AO"
+                },
+                {
+                  "label": "DCIS_DT_CV",
+                  "value": "DCIS_DT_CV"
+                },
+                {
+                  "label": "DCIS_DT_VLV",
+                  "value": "DCIS_DT_VLV"
+                },
+                {
+                  "label": "ThirdCustomer/_DT_AI",
+                  "value": "ThirdCustomer/_DT_AI"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Get the data from the table (assuming it\u0027s a dataset)\n\tdata \u003d self.parent.parent.getChild(\"FlexContainer\").getChild(\"Table\").props.data\n\t\n\t# Initialize a set to hold unique values of the \"Type\" column\n\tunique_types \u003d set()\n\t\n\t# Loop through each row in the table data\n\tfor row in data:\n\t    type_value \u003d row[\u0027Type\u0027]  # Replace \u0027Type\u0027 with the exact column name\n\t    unique_types.add(type_value)  # Add the type to the set, ensuring only unique values\n\t\n\t# Convert the unique types to a list of dictionaries for the dropdown options\n\toptions \u003d [{\"label\": type_value, \"value\": type_value} for type_value in unique_types]\n\t\n\t# Set the options property of the dropdown component\n\tdropdown \u003d self.getSibling(\"Dropdown\")  # Adjust the path to your actual dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "multiSelect": true,
+              "options": [
+                {
+                  "label": "TT",
+                  "value": "TT"
+                },
+                {
+                  "label": "SV",
+                  "value": "SV"
+                },
+                {
+                  "label": "MXP",
+                  "value": "MXP"
+                },
+                {
+                  "label": "PT",
+                  "value": "PT"
+                },
+                {
+                  "label": "OT",
+                  "value": "OT"
+                },
+                {
+                  "label": "TCV",
+                  "value": "TCV"
+                },
+                {
+                  "label": "LS",
+                  "value": "LS"
+                },
+                {
+                  "label": "LT",
+                  "value": "LT"
+                },
+                {
+                  "label": "FS",
+                  "value": "FS"
+                },
+                {
+                  "label": "FT",
+                  "value": "FT"
+                },
+                {
+                  "label": "WE",
+                  "value": "WE"
+                },
+                {
+                  "label": "CT",
+                  "value": "CT"
+                },
+                {
+                  "label": "VFD",
+                  "value": "VFD"
+                },
+                {
+                  "label": "TEST",
+                  "value": "TEST"
+                },
+                {
+                  "label": "PH",
+                  "value": "PH"
+                },
+                {
+                  "label": "ZS",
+                  "value": "ZS"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "Dropdown5"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown4/Dropdown0.props.value"
+              },
+              "transforms": [
+                {
+                  "expression": "if({value}!\u003d 0,true,false)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "classes": "exchange/udt-instance-generator/UDTContainers"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Define the folder path\n\tfolderPath \u003d \"[default]_types_\"\n\t\n\t# List to hold dropdown options\n\toptions \u003d []\n\t\n\t# Browse the folder for tags filtering just UDTTypes\n\tresults \u003d system.tag.browse(folderPath , {\"tagType\":\"UdtType\", \"recursive\":True})\n\t\n\t# Iterate through the results and collect tag names\n\tfor result in results.getResults():\n\t    # Get the full path of the tag and convert it to a string\n\t    fullPath \u003d str(result[\u0027fullPath\u0027])\n\t    # Split the full path by \u0027_types_\u0027 and get the last part (tag name)\n\t    tagName \u003d fullPath.split(\u0027_types_/\u0027)[-1]  # Get the last element after splitting\n\t    # Create a dictionary for each tag for the dropdown\n\t    options.append({\"label\": tagName, \"value\": tagName})\n\t\n\t#Set the options property of the dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown0"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Customer1/VFD",
+                  "value": "Customer1/VFD"
+                },
+                {
+                  "label": "Customer2/test 4",
+                  "value": "Customer2/test 4"
+                },
+                {
+                  "label": "DCIS_DT_AI",
+                  "value": "DCIS_DT_AI"
+                },
+                {
+                  "label": "DCIS_DT_AO",
+                  "value": "DCIS_DT_AO"
+                },
+                {
+                  "label": "DCIS_DT_CV",
+                  "value": "DCIS_DT_CV"
+                },
+                {
+                  "label": "DCIS_DT_VLV",
+                  "value": "DCIS_DT_VLV"
+                },
+                {
+                  "label": "ThirdCustomer/_DT_AI",
+                  "value": "ThirdCustomer/_DT_AI"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Get the data from the table (assuming it\u0027s a dataset)\n\tdata \u003d self.parent.parent.getChild(\"FlexContainer\").getChild(\"Table\").props.data\n\t\n\t# Initialize a set to hold unique values of the \"Type\" column\n\tunique_types \u003d set()\n\t\n\t# Loop through each row in the table data\n\tfor row in data:\n\t    type_value \u003d row[\u0027Type\u0027]  # Replace \u0027Type\u0027 with the exact column name\n\t    unique_types.add(type_value)  # Add the type to the set, ensuring only unique values\n\t\n\t# Convert the unique types to a list of dictionaries for the dropdown options\n\toptions \u003d [{\"label\": type_value, \"value\": type_value} for type_value in unique_types]\n\t\n\t# Set the options property of the dropdown component\n\tdropdown \u003d self.getSibling(\"Dropdown\")  # Adjust the path to your actual dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "multiSelect": true,
+              "options": [
+                {
+                  "label": "TT",
+                  "value": "TT"
+                },
+                {
+                  "label": "SV",
+                  "value": "SV"
+                },
+                {
+                  "label": "MXP",
+                  "value": "MXP"
+                },
+                {
+                  "label": "PT",
+                  "value": "PT"
+                },
+                {
+                  "label": "OT",
+                  "value": "OT"
+                },
+                {
+                  "label": "TCV",
+                  "value": "TCV"
+                },
+                {
+                  "label": "LS",
+                  "value": "LS"
+                },
+                {
+                  "label": "LT",
+                  "value": "LT"
+                },
+                {
+                  "label": "FS",
+                  "value": "FS"
+                },
+                {
+                  "label": "FT",
+                  "value": "FT"
+                },
+                {
+                  "label": "WE",
+                  "value": "WE"
+                },
+                {
+                  "label": "CT",
+                  "value": "CT"
+                },
+                {
+                  "label": "VFD",
+                  "value": "VFD"
+                },
+                {
+                  "label": "PH",
+                  "value": "PH"
+                },
+                {
+                  "label": "ZS",
+                  "value": "ZS"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "Dropdown6"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown5/Dropdown0.props.value"
+              },
+              "transforms": [
+                {
+                  "expression": "if({value}!\u003d 0,true,false)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "classes": "exchange/udt-instance-generator/UDTContainers"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Define the folder path\n\tfolderPath \u003d \"[default]_types_\"\n\t\n\t# List to hold dropdown options\n\toptions \u003d []\n\t\n\t# Browse the folder for tags filtering just UDTTypes\n\tresults \u003d system.tag.browse(folderPath , {\"tagType\":\"UdtType\", \"recursive\":True})\n\t\n\t# Iterate through the results and collect tag names\n\tfor result in results.getResults():\n\t    # Get the full path of the tag and convert it to a string\n\t    fullPath \u003d str(result[\u0027fullPath\u0027])\n\t    # Split the full path by \u0027_types_\u0027 and get the last part (tag name)\n\t    tagName \u003d fullPath.split(\u0027_types_/\u0027)[-1]  # Get the last element after splitting\n\t    # Create a dictionary for each tag for the dropdown\n\t    options.append({\"label\": tagName, \"value\": tagName})\n\t\n\t#Set the options property of the dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown0"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Customer1/VFD",
+                  "value": "Customer1/VFD"
+                },
+                {
+                  "label": "Customer2/test 4",
+                  "value": "Customer2/test 4"
+                },
+                {
+                  "label": "DCIS_DT_AI",
+                  "value": "DCIS_DT_AI"
+                },
+                {
+                  "label": "DCIS_DT_AO",
+                  "value": "DCIS_DT_AO"
+                },
+                {
+                  "label": "DCIS_DT_CV",
+                  "value": "DCIS_DT_CV"
+                },
+                {
+                  "label": "DCIS_DT_VLV",
+                  "value": "DCIS_DT_VLV"
+                },
+                {
+                  "label": "ThirdCustomer/_DT_AI",
+                  "value": "ThirdCustomer/_DT_AI"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Get the data from the table (assuming it\u0027s a dataset)\n\tdata \u003d self.parent.parent.getChild(\"FlexContainer\").getChild(\"Table\").props.data\n\t\n\t# Initialize a set to hold unique values of the \"Type\" column\n\tunique_types \u003d set()\n\t\n\t# Loop through each row in the table data\n\tfor row in data:\n\t    type_value \u003d row[\u0027Type\u0027]  # Replace \u0027Type\u0027 with the exact column name\n\t    unique_types.add(type_value)  # Add the type to the set, ensuring only unique values\n\t\n\t# Convert the unique types to a list of dictionaries for the dropdown options\n\toptions \u003d [{\"label\": type_value, \"value\": type_value} for type_value in unique_types]\n\t\n\t# Set the options property of the dropdown component\n\tdropdown \u003d self.getSibling(\"Dropdown\")  # Adjust the path to your actual dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "multiSelect": true,
+              "options": [
+                {
+                  "label": "SV",
+                  "value": "SV"
+                },
+                {
+                  "label": "MXP",
+                  "value": "MXP"
+                },
+                {
+                  "label": "FT",
+                  "value": "FT"
+                },
+                {
+                  "label": "VFD",
+                  "value": "VFD"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "Dropdown7"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown6/Dropdown0.props.value"
+              },
+              "transforms": [
+                {
+                  "expression": "if({value}!\u003d 0,true,false)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "classes": "exchange/udt-instance-generator/UDTContainers"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Define the folder path\n\tfolderPath \u003d \"[default]_types_\"\n\t\n\t# List to hold dropdown options\n\toptions \u003d []\n\t\n\t# Browse the folder for tags filtering just UDTTypes\n\tresults \u003d system.tag.browse(folderPath , {\"tagType\":\"UdtType\", \"recursive\":True})\n\t\n\t# Iterate through the results and collect tag names\n\tfor result in results.getResults():\n\t    # Get the full path of the tag and convert it to a string\n\t    fullPath \u003d str(result[\u0027fullPath\u0027])\n\t    # Split the full path by \u0027_types_\u0027 and get the last part (tag name)\n\t    tagName \u003d fullPath.split(\u0027_types_/\u0027)[-1]  # Get the last element after splitting\n\t    # Create a dictionary for each tag for the dropdown\n\t    options.append({\"label\": tagName, \"value\": tagName})\n\t\n\t#Set the options property of the dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown0"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Customer1/VFD",
+                  "value": "Customer1/VFD"
+                },
+                {
+                  "label": "Customer2/test 4",
+                  "value": "Customer2/test 4"
+                },
+                {
+                  "label": "DCIS_DT_AI",
+                  "value": "DCIS_DT_AI"
+                },
+                {
+                  "label": "DCIS_DT_AO",
+                  "value": "DCIS_DT_AO"
+                },
+                {
+                  "label": "DCIS_DT_CV",
+                  "value": "DCIS_DT_CV"
+                },
+                {
+                  "label": "DCIS_DT_VLV",
+                  "value": "DCIS_DT_VLV"
+                },
+                {
+                  "label": "ThirdCustomer/_DT_AI",
+                  "value": "ThirdCustomer/_DT_AI"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Get the data from the table (assuming it\u0027s a dataset)\n\tdata \u003d self.parent.parent.getChild(\"FlexContainer\").getChild(\"Table\").props.data\n\t\n\t# Initialize a set to hold unique values of the \"Type\" column\n\tunique_types \u003d set()\n\t\n\t# Loop through each row in the table data\n\tfor row in data:\n\t    type_value \u003d row[\u0027Type\u0027]  # Replace \u0027Type\u0027 with the exact column name\n\t    unique_types.add(type_value)  # Add the type to the set, ensuring only unique values\n\t\n\t# Convert the unique types to a list of dictionaries for the dropdown options\n\toptions \u003d [{\"label\": type_value, \"value\": type_value} for type_value in unique_types]\n\t\n\t# Set the options property of the dropdown component\n\tdropdown \u003d self.getSibling(\"Dropdown\")  # Adjust the path to your actual dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "multiSelect": true,
+              "options": [
+                {
+                  "label": "TT",
+                  "value": "TT"
+                },
+                {
+                  "label": "SV",
+                  "value": "SV"
+                },
+                {
+                  "label": "MXP",
+                  "value": "MXP"
+                },
+                {
+                  "label": "PT",
+                  "value": "PT"
+                },
+                {
+                  "label": "OT",
+                  "value": "OT"
+                },
+                {
+                  "label": "MS",
+                  "value": "MS"
+                },
+                {
+                  "label": "TCV",
+                  "value": "TCV"
+                },
+                {
+                  "label": "LS",
+                  "value": "LS"
+                },
+                {
+                  "label": "LT",
+                  "value": "LT"
+                },
+                {
+                  "label": "FS",
+                  "value": "FS"
+                },
+                {
+                  "label": "FT",
+                  "value": "FT"
+                },
+                {
+                  "label": "WE",
+                  "value": "WE"
+                },
+                {
+                  "label": "CT",
+                  "value": "CT"
+                },
+                {
+                  "label": "VFD",
+                  "value": "VFD"
+                },
+                {
+                  "label": "PH",
+                  "value": "PH"
+                },
+                {
+                  "label": "ZS",
+                  "value": "ZS"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "Dropdown8"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown7/Dropdown0.props.value"
+              },
+              "transforms": [
+                {
+                  "expression": "if({value}!\u003d 0,true,false)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "classes": "exchange/udt-instance-generator/UDTContainers"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Define the folder path\n\tfolderPath \u003d \"[default]_types_\"\n\t\n\t# List to hold dropdown options\n\toptions \u003d []\n\t\n\t# Browse the folder for tags filtering just UDTTypes\n\tresults \u003d system.tag.browse(folderPath , {\"tagType\":\"UdtType\", \"recursive\":True})\n\t\n\t# Iterate through the results and collect tag names\n\tfor result in results.getResults():\n\t    # Get the full path of the tag and convert it to a string\n\t    fullPath \u003d str(result[\u0027fullPath\u0027])\n\t    # Split the full path by \u0027_types_\u0027 and get the last part (tag name)\n\t    tagName \u003d fullPath.split(\u0027_types_/\u0027)[-1]  # Get the last element after splitting\n\t    # Create a dictionary for each tag for the dropdown\n\t    options.append({\"label\": tagName, \"value\": tagName})\n\t\n\t#Set the options property of the dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown0"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Customer1/VFD",
+                  "value": "Customer1/VFD"
+                },
+                {
+                  "label": "Customer2/test 4",
+                  "value": "Customer2/test 4"
+                },
+                {
+                  "label": "DCIS_DT_AI",
+                  "value": "DCIS_DT_AI"
+                },
+                {
+                  "label": "DCIS_DT_AO",
+                  "value": "DCIS_DT_AO"
+                },
+                {
+                  "label": "DCIS_DT_CV",
+                  "value": "DCIS_DT_CV"
+                },
+                {
+                  "label": "DCIS_DT_VLV",
+                  "value": "DCIS_DT_VLV"
+                },
+                {
+                  "label": "ThirdCustomer/_DT_AI",
+                  "value": "ThirdCustomer/_DT_AI"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Get the data from the table (assuming it\u0027s a dataset)\n\tdata \u003d self.parent.parent.getChild(\"FlexContainer\").getChild(\"Table\").props.data\n\t\n\t# Initialize a set to hold unique values of the \"Type\" column\n\tunique_types \u003d set()\n\t\n\t# Loop through each row in the table data\n\tfor row in data:\n\t    type_value \u003d row[\u0027Type\u0027]  # Replace \u0027Type\u0027 with the exact column name\n\t    unique_types.add(type_value)  # Add the type to the set, ensuring only unique values\n\t\n\t# Convert the unique types to a list of dictionaries for the dropdown options\n\toptions \u003d [{\"label\": type_value, \"value\": type_value} for type_value in unique_types]\n\t\n\t# Set the options property of the dropdown component\n\tdropdown \u003d self.getSibling(\"Dropdown\")  # Adjust the path to your actual dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "multiSelect": true,
+              "options": [
+                {
+                  "label": "SV",
+                  "value": "SV"
+                },
+                {
+                  "label": "MXP",
+                  "value": "MXP"
+                },
+                {
+                  "label": "FT",
+                  "value": "FT"
+                },
+                {
+                  "label": "VFD",
+                  "value": "VFD"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "Dropdown9"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown8/Dropdown0.props.value"
+              },
+              "transforms": [
+                {
+                  "expression": "if({value}!\u003d 0,true,false)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "classes": "exchange/udt-instance-generator/UDTContainers"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Define the folder path\n\tfolderPath \u003d \"[default]_types_\"\n\t\n\t# List to hold dropdown options\n\toptions \u003d []\n\t\n\t# Browse the folder for tags filtering just UDTTypes\n\tresults \u003d system.tag.browse(folderPath , {\"tagType\":\"UdtType\", \"recursive\":True})\n\t\n\t# Iterate through the results and collect tag names\n\tfor result in results.getResults():\n\t    # Get the full path of the tag and convert it to a string\n\t    fullPath \u003d str(result[\u0027fullPath\u0027])\n\t    # Split the full path by \u0027_types_\u0027 and get the last part (tag name)\n\t    tagName \u003d fullPath.split(\u0027_types_/\u0027)[-1]  # Get the last element after splitting\n\t    # Create a dictionary for each tag for the dropdown\n\t    options.append({\"label\": tagName, \"value\": tagName})\n\t\n\t#Set the options property of the dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown0"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "options": [
+                {
+                  "label": "Customer1/VFD",
+                  "value": "Customer1/VFD"
+                },
+                {
+                  "label": "Customer2/test 4",
+                  "value": "Customer2/test 4"
+                },
+                {
+                  "label": "DCIS_DT_AI",
+                  "value": "DCIS_DT_AI"
+                },
+                {
+                  "label": "DCIS_DT_AO",
+                  "value": "DCIS_DT_AO"
+                },
+                {
+                  "label": "DCIS_DT_CV",
+                  "value": "DCIS_DT_CV"
+                },
+                {
+                  "label": "DCIS_DT_VLV",
+                  "value": "DCIS_DT_VLV"
+                },
+                {
+                  "label": "ThirdCustomer/_DT_AI",
+                  "value": "ThirdCustomer/_DT_AI"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "events": {
+              "dom": {
+                "onFocus": {
+                  "config": {
+                    "script": "\t# Get the data from the table (assuming it\u0027s a dataset)\n\tdata \u003d self.parent.parent.getChild(\"FlexContainer\").getChild(\"Table\").props.data\n\t\n\t# Initialize a set to hold unique values of the \"Type\" column\n\tunique_types \u003d set()\n\t\n\t# Loop through each row in the table data\n\tfor row in data:\n\t    type_value \u003d row[\u0027Type\u0027]  # Replace \u0027Type\u0027 with the exact column name\n\t    unique_types.add(type_value)  # Add the type to the set, ensuring only unique values\n\t\n\t# Convert the unique types to a list of dictionaries for the dropdown options\n\toptions \u003d [{\"label\": type_value, \"value\": type_value} for type_value in unique_types]\n\t\n\t# Set the options property of the dropdown component\n\tdropdown \u003d self.getSibling(\"Dropdown\")  # Adjust the path to your actual dropdown component\n\tself.props.options \u003d options"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Dropdown"
+            },
+            "position": {
+              "basis": "256px"
+            },
+            "props": {
+              "multiSelect": true,
+              "options": [
+                {
+                  "label": "SV",
+                  "value": "SV"
+                },
+                {
+                  "label": "MXP",
+                  "value": "MXP"
+                },
+                {
+                  "label": "FT",
+                  "value": "FT"
+                },
+                {
+                  "label": "VFD",
+                  "value": "VFD"
+                }
+              ],
+              "style": {
+                "classes": "exchange/udt-instance-generator/Dropdown"
+              },
+              "value": 0
+            },
+            "type": "ia.input.dropdown"
+          }
+        ],
+        "meta": {
+          "name": "Dropdown10"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown9/Dropdown0.props.value"
+              },
+              "transforms": [
+                {
+                  "expression": "if({value}!\u003d 0,true,false)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "classes": "exchange/udt-instance-generator/UDTContainers"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "component": {
+                "onActionPerformed": {
+                  "config": {
+                    "script": "\t#clear udt selections\n\tself.parent.parent.getChild(\"Dropdown1\").getChild(\"Dropdown0\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown2\").getChild(\"Dropdown0\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown3\").getChild(\"Dropdown0\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown4\").getChild(\"Dropdown0\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown5\").getChild(\"Dropdown0\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown6\").getChild(\"Dropdown0\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown7\").getChild(\"Dropdown0\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown8\").getChild(\"Dropdown0\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown9\").getChild(\"Dropdown0\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown10\").getChild(\"Dropdown0\").props.value \u003d 0\n\t#clear tag selections\n\tself.parent.parent.getChild(\"Dropdown1\").getChild(\"Dropdown\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown2\").getChild(\"Dropdown\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown3\").getChild(\"Dropdown\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown4\").getChild(\"Dropdown\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown5\").getChild(\"Dropdown\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown6\").getChild(\"Dropdown\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown7\").getChild(\"Dropdown\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown8\").getChild(\"Dropdown\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown9\").getChild(\"Dropdown\").props.value \u003d 0\n\tself.parent.parent.getChild(\"Dropdown10\").getChild(\"Dropdown\").props.value \u003d 0"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Button"
+            },
+            "position": {
+              "basis": "50px"
+            },
+            "propConfig": {
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "path": "../.../Dropdown1/Dropdown_0.props.value"
+                  },
+                  "transforms": [
+                    {
+                      "expression": "if({value}!\u003d 0,true,false)",
+                      "type": "expression"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "image": {
+                "position": "right"
+              },
+              "style": {
+                "classes": "exchange/udt-instance-generator/Button"
+              },
+              "text": "Clear"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "ClearSelection"
+        },
+        "position": {
+          "basis": "50px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "../Dropdown1/Dropdown0.props.value"
+              },
+              "transforms": [
+                {
+                  "expression": "if({value} \u003d 0, false,true)",
+                  "type": "expression"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "marginLeft": "50px",
+            "marginRight": "50px",
+            "marginTop": "10px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "110px"
+            },
+            "props": {
+              "style": {
+                "color": "#D5D5D5",
+                "fontFamily": "Verdana",
+                "fontSize": "14pt"
+              },
+              "text": "Parameters"
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "TableHeader0"
+        },
+        "position": {
+          "basis": "25px",
+          "shrink": 0
+        },
+        "props": {
+          "alignContent": "center",
+          "alignItems": "center",
+          "justify": "center",
+          "style": {
+            "backgroundColor": "#808080",
+            "borderBottomRightRadius": "0px",
+            "borderTopLeftRadius": "15px",
+            "borderTopRightRadius": "15px",
+            "marginLeft": "50px",
+            "marginRight": "50px",
+            "marginTop": "0px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "150px"
+            },
+            "props": {
+              "style": {
+                "textAlign": "center"
+              },
+              "text": "Parameter Name:"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Parameter1Name"
+            },
+            "position": {
+              "basis": "150px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "marginBottom": "5px",
+                "marginTop": "5px"
+              },
+              "text": "OPC Topic"
+            },
+            "type": "ia.input.text-field"
+          },
+          {
+            "meta": {
+              "name": "Label0"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "style": {
+                "textAlign": "center"
+              },
+              "text": "Value:"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Parameter1"
+            },
+            "position": {
+              "basis": "150px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "marginBottom": "5px",
+                "marginTop": "5px"
+              }
+            },
+            "type": "ia.input.text-field"
+          }
+        ],
+        "meta": {
+          "name": "Parameter"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "backgroundColor": "#F1F1F1",
+            "borderBottomLeftRadius": "0px",
+            "borderBottomRightRadius": "0px",
+            "marginBottom": "0px",
+            "marginLeft": "50px",
+            "marginRight": "50px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "150px"
+            },
+            "props": {
+              "style": {
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Parameter2Name"
+            },
+            "position": {
+              "basis": "150px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "marginBottom": "5px",
+                "marginTop": "5px"
+              }
+            },
+            "type": "ia.input.text-field"
+          },
+          {
+            "meta": {
+              "name": "Label0"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "style": {
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Parameter2"
+            },
+            "position": {
+              "basis": "150px",
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "marginBottom": "5px",
+                "marginTop": "5px"
+              }
+            },
+            "type": "ia.input.text-field"
+          }
+        ],
+        "meta": {
+          "name": "Parameter2"
+        },
+        "position": {
+          "basis": "50px"
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "backgroundColor": "#F1F1F1",
+            "borderBottomLeftRadius": "15px",
+            "borderBottomRightRadius": "15px",
+            "marginBottom": "20px",
+            "marginLeft": "50px",
+            "marginRight": "50px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "110px"
+            },
+            "props": {
+              "style": {
+                "color": "#D5D5D5",
+                "fontFamily": "Verdana",
+                "fontSize": "14pt"
+              },
+              "text": "Configuration"
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "Table Header",
+          "visible": 1
+        },
+        "position": {
+          "basis": "25px",
+          "shrink": 0
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "backgroundColor": "#808080",
+            "borderBottomRightRadius": "0px",
+            "borderTopLeftRadius": "15px",
+            "borderTopRightRadius": "15px",
+            "marginLeft": "50px",
+            "marginRight": "50px",
+            "marginTop": "0px"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "TagBrowseTree"
+            },
+            "position": {
+              "basis": "235px"
+            },
+            "props": {
+              "style": {
+                "borderBottomLeftRadius": "15px",
+                "marginLeft": "50px"
+              }
+            },
+            "type": "ia.display.tag-browse-tree"
+          },
+          {
+            "meta": {
+              "name": "Table"
+            },
+            "position": {
+              "grow": 1
+            },
+            "props": {
+              "cells": {
+                "allowEditOn": "single-click"
+              },
+              "columns": [
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "Tag",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": false,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "justify": "auto",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": true,
+                  "width": ""
+                },
+                {
+                  "align": "center",
+                  "boolean": "checkbox",
+                  "dateFormat": "MM/DD/YYYY",
+                  "editable": false,
+                  "field": "Type",
+                  "filter": {
+                    "boolean": {
+                      "condition": ""
+                    },
+                    "date": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "enabled": false,
+                    "number": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "string": {
+                      "condition": "",
+                      "value": ""
+                    },
+                    "visible": "on-hover"
+                  },
+                  "footer": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "header": {
+                    "align": "center",
+                    "justify": "left",
+                    "style": {
+                      "classes": ""
+                    },
+                    "title": ""
+                  },
+                  "justify": "auto",
+                  "nullFormat": {
+                    "includeNullStrings": false,
+                    "nullFormatValue": "",
+                    "strict": false
+                  },
+                  "number": "value",
+                  "numberFormat": "0,0.##",
+                  "progressBar": {
+                    "bar": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "max": 100,
+                    "min": 0,
+                    "track": {
+                      "color": "",
+                      "style": {
+                        "classes": ""
+                      }
+                    },
+                    "value": {
+                      "enabled": true,
+                      "format": "0,0.##",
+                      "justify": "center",
+                      "style": {
+                        "classes": ""
+                      }
+                    }
+                  },
+                  "render": "auto",
+                  "resizable": true,
+                  "sort": "none",
+                  "sortable": true,
+                  "strictWidth": false,
+                  "style": {
+                    "classes": ""
+                  },
+                  "toggleSwitch": {
+                    "color": {
+                      "selected": "",
+                      "unselected": ""
+                    }
+                  },
+                  "viewParams": {},
+                  "viewPath": "",
+                  "visible": true,
+                  "width": ""
+                }
+              ],
+              "style": {
+                "backgroundColor": "#F1F1F1"
+              }
+            },
+            "type": "ia.display.table"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "32px"
+                },
+                "props": {
+                  "style": {
+                    "backgroundColor": "#D5D5D5",
+                    "borderBottomLeftRadius": "0px",
+                    "borderBottomRightRadius": "0px",
+                    "borderColor": "#d5d5d5",
+                    "borderStyle": "solid",
+                    "borderTopLeftRadius": "0px",
+                    "borderTopRightRadius": "0px",
+                    "borderWidth": "1px"
+                  },
+                  "text": "Data Paste",
+                  "textStyle": {
+                    "color": "#2b2b2b",
+                    "fontFamily": "sans-serif",
+                    "fontSize": "12pt",
+                    "textAlign": "center"
+                  }
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "TextArea"
+                },
+                "position": {
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "backgroundColor": "#F1F1F1",
+                    "borderStyle": "none"
+                  },
+                  "wrap": "off"
+                },
+                "type": "ia.input.text-area"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\t\t\t# Get the pasted data from the Text Area\n\tpastedData \u003d self.getSibling(\"TextArea\").props.text  # Adjust for the actual Text Area component path\n\t\n\t# Split pasted data into rows\n\trows \u003d pastedData.split(\"\\n\")\n\t\n\t# Initialize an empty list to hold the table data\n\ttableData \u003d []\n\t\n\t# Iterate through rows\n\tfor row in rows:\n\t    if row.strip():  # Ensure the row is not empty\n\t        # Split each row by tab (adjust to commas if CSV)\n\t        columns \u003d row.split(\"\\t\")  # Adjust delimiter depending on the pasted data format\n\t        # Create a dictionary for each row (adjust keys to match your table\u0027s column names)\n\t        rowData \u003d {\n\t            \"Type\": columns[0],  # Adjust column names as per your table\u0027s columns\n\t            \"Tag\": columns[1]\n\t            \n\t            # Add more columns as needed\n\t        }\n\t        # Append the row data to the list\n\t        tableData.append(rowData)\n\t\n\t# Assign the parsed data to the table\u0027s props.data property\n\tself.parent.parent.getChild(\"Table\").props.data \u003d tableData  # Adjust for the actual Table component path"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Button"
+                },
+                "position": {
+                  "basis": "34px"
+                },
+                "props": {
+                  "image": {
+                    "style": {
+                      "marginBottom": "20px"
+                    }
+                  },
+                  "style": {
+                    "classes": "exchange/udt-instance-generator/Button"
+                  },
+                  "text": "Load Data"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "300px"
+            },
+            "props": {
+              "direction": "column",
+              "style": {
+                "backgroundColor": "#F1F1F1",
+                "borderBottomRightRadius": "15px",
+                "marginBottom": 0,
+                "marginLeft": "0px",
+                "marginRight": "50px"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "basis": "400px"
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#4F4F4F",
+            "classes": "exchange/udt-instance-generator/UDTContainers"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\t#Delete Folders and all Nested Tags\n\tresults \u003d system.tag.browse(\"[default]\")\n\n\tfor i in results.getResults():\n\t    stringPath \u003d str(i[\u0027fullPath\u0027])\n\t    system.tag.deleteTags([stringPath])\n\t    \n\t#Refresh Tag Tree\n\tself.parent.parent.parent.getChild(\"FlexContainer\").getChild(\"TagBrowseTree\").props.root.path \u003d \" \"\n\tself.parent.parent.parent.getChild(\"FlexContainer\").getChild(\"TagBrowseTree\").props.root.path \u003d \"\""
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Button"
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "classes": "exchange/udt-instance-generator/Button"
+                  },
+                  "text": "Delete Tags"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "custom": {
+                  "filteredData": []
+                },
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\ttableData \u003d self.parent.parent.parent.getChild(\"FlexContainer\").getChild(\"Table\").props.data\n\tparam1Name \u003d self.parent.parent.parent.getChild(\"Parameter\").getChild(\"Parameter1Name\").props.text\n\tparam1 \u003d self.parent.parent.parent.getChild(\"Parameter\").getChild(\"Parameter1\").props.text\n\tparam2Name \u003d self.parent.parent.parent.getChild(\"Parameter2\").getChild(\"Parameter2Name\").props.text\n\tparam2 \u003d self.parent.parent.parent.getChild(\"Parameter2\").getChild(\"Parameter2\").props.text\n\t\n\t# Create lists to store the selections and selected types\n\tselections \u003d []\n\tselectedTypes \u003d []\n\t\n\t# Loop through dropdowns 1 to 10\n\tfor i in range(1, 11):\n\t    dropdown \u003d self.parent.parent.parent.getChild(\"Dropdown{}\".format(i)).getChild(\"Dropdown0\").props.value\n\t    selections.append(dropdown)\n\t    \n\t    selectedType \u003d self.parent.parent.parent.getChild(\"Dropdown{}\".format(i)).getChild(\"Dropdown\").props.value\n\t    selectedTypes.append(selectedType)\n\t\n\tfor i in range (0,10):\n\t\t#Add Folders if selection not Null\n\t\tif selections[i]:\n\t\t\tfolderName \u003d selections[i].replace(\"/\" , \"_\")\n\t\t\tsystem.tag.addTag(parentPath\u003d\u0027\u0027, name\u003dfolderName, tagType\u003d\"Folder\")\n\t\t#Check for blank entries, then call GnenerateTag\n\t\tif selections[i] !0:\n\t\t\tif selectedTypes[i] !0:\n\t\t\t\tfolderName \u003d selections[i].replace(\"/\" , \"_\")\n\t\t\t\tGenerateTag.generateTag(tableData, selectedTypes[i], selections[i], folderName, param1Name, param1, param2Name, param2)\t\n\t#Refresh Tag Tree\n\tself.parent.parent.parent.getChild(\"FlexContainer\").getChild(\"TagBrowseTree\").props.root.path \u003d \" \"\n\tself.parent.parent.parent.getChild(\"FlexContainer\").getChild(\"TagBrowseTree\").props.root.path \u003d \"\""
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Button0"
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "classes": "exchange/udt-instance-generator/Button"
+                  },
+                  "text": "Generate Tags"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onActionPerformed": {
+                      "config": {
+                        "script": "\t#Exports Tags to Gateway\n\tfilePath \u003d \u0027C:\\\\tags.json\u0027        \n\ttagPaths \u003d [\"[default]\"]\n\trecursive \u003d True\n \n\tsystem.tag.exportTags(filePath, tagPaths, recursive, format\u003d\"JSON\")\n\t\n\t#Download file from Gateway\n\tfilename \u003d \u0027tags.json\u0027\n\tdata \u003d system.file.readFileAsBytes(\u0027C:\\\\\u0027+filename)\n\tsystem.perspective.download(filename, data)"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Button1"
+                },
+                "position": {
+                  "basis": "180px",
+                  "grow": 1
+                },
+                "props": {
+                  "style": {
+                    "classes": "exchange/udt-instance-generator/Button"
+                  },
+                  "text": "Export Tags"
+                },
+                "type": "ia.input.button"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "100px"
+            },
+            "props": {
+              "justify": "space-around"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "Buttons"
+        },
+        "position": {
+          "basis": "100px",
+          "grow": 1
+        },
+        "props": {
+          "direction": "column",
+          "justify": "flex-end",
+          "style": {
+            "backgroundColor": "#4F4F4F",
+            "classes": "exchange/udt-instance-generator/UDTContainers"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "25px",
+          "shrink": 0
+        },
+        "props": {
+          "alignVertical": "bottom",
+          "style": {
+            "fontSize": "14px",
+            "marginTop": "10px"
+          },
+          "text": "Created by Jack Russo  ",
+          "textStyle": {
+            "textAlign": "end"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "backgroundColor": "#4F4F4F"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "pages": {
+    "/": {
+      "title": "",
+      "viewPath": "Exchange/UDTInstanceGenerator/UDT Import"
+    },
+    "/UDTImport": {
+      "title": "",
+      "viewPath": "Exchange/UDTInstanceGenerator/UDT Import"
+    }
+  },
+  "sharedDocks": {
+    "cornerPriority": "top-bottom"
+  }
+}

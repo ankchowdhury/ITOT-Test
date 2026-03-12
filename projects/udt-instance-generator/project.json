@@ -1,0 +1,6 @@
+{
+  "title": "udt-instance-generator",
+  "description": "The purpose of this tool is to easily generate multiple UDT instances of various UDT definitions from an Excel (or similar) device list. The tool is intended to be a standalone project that the user can export tags from after generating. The project will contain all of your standard UDT definitions and supports folders for different customers, ect.",
+  "enabled": true,
+  "inheritable": false
+}

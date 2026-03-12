@@ -1,0 +1,16 @@
+{
+  "scope": "C",
+  "version": 1,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "data.bin"
+  ],
+  "attributes": {
+    "lastModification": {
+      "actor": "DCI",
+      "timestamp": "2024-09-20T19:55:11Z"
+    },
+    "lastModificationSignature": "f0f2bdf63d7bd85dabf726e7b5d7c06c804a132302f28c78fa1bb150278e2d2b"
+  }
+}

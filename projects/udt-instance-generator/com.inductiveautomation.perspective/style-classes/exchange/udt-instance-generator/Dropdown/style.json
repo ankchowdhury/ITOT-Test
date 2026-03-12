@@ -1,0 +1,20 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#F1F1F1",
+      "borderStyle": "none",
+      "borderTopLeftRadius": "5px",
+      "borderTopRightRadius": "5px",
+      "borderBottomLeftRadius": "5px",
+      "borderBottomRightRadius": "5px",
+      "marginLeft": "25px",
+      "marginRight": "25px",
+      "marginTop": "5px",
+      "opacity": "1",
+      "outlineStyle": "none",
+      "overflow": "auto",
+      "overflowX": "auto",
+      "overflowY": "auto"
+    }
+  }
+}
